@@ -13,7 +13,6 @@ def create_sample_level_dict(title_set):
 
     level_count=int(len(title_set)/10)+1
     level_dict = {v: "l"+str(int(int(k)%10)+1) for k,v in enumerate(title_set)} 
-    
     return level_dict
 
 # Read Sample Input Json Path

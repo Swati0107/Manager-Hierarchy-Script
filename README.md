@@ -17,3 +17,17 @@ This is a script written in python which is used to get generates a file with th
 
 - Go to the same directory and run the below command
 - python managers_hierarchy.py
+
+
+## Sample Employee and Manager Level mapping
+{
+  "Sales Operations Manager": "l1",
+  "Head of Customer Experience Strategy": "l2",
+  "Supervisor": "l3",
+  "Sales Director - CSM": "l4",
+  "Senior Sales Manager - Federal": "l5",
+  "Regional Sales Director – Healthcare & SLED": "l6",
+  "Sr. Manager Solution Consulting": "l10",
+  "Sales Director - Spain": "l1",
+  "Sr Manager": "l2"
+}
