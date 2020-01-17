@@ -3,6 +3,10 @@ import json
 import pandas as pd
 from json.decoder import JSONDecodeError
 import csv
+import time
+
+# Track starting time
+start_time = time.time()
 
 # Creating random roles list to defind levels as it's value
 def create_sample_level_dict(title_set):
@@ -75,9 +79,13 @@ try:
     df['Manager Level']=df['Manager_Role_Position']
     del df['Manager_Role_Position'] 
     df.to_csv(output_path, index=None)
-            
+ 
 except JSONDecodeError:
     print("Please provide valid json as an input!!!")
 
 except Exception as ex:
     print("There is something went wrong int the script!", ex)
+
+finally:
+     print("Total execution time: ", time.time()-start_time)
+
