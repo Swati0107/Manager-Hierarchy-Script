@@ -11,7 +11,8 @@ This is a script written in python which is used to get generates a file with th
 
 ## Prerequisites
 - python==3.5.8
-  
+- pandas==0.25.3
+
 # Steps to run the script
 
 - Go to the same directory and run the below command

@@ -73,7 +73,7 @@ try:
     df = pd.DataFrame(data=ul_list_final, columns=column_list).fillna('')
 
     df['Manager Level']=df['Manager_Role_Position']
-    df.drop(['Manager_Role_Position'], axis = 1) 
+    del df['Manager_Role_Position'] 
     df.to_csv(output_path, index=None)
             
 except JSONDecodeError:
