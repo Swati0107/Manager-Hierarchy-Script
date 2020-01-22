@@ -4,6 +4,7 @@ import pandas as pd
 from json.decoder import JSONDecodeError
 import csv
 import time
+import datetime
 
 # Track starting time
 start_time = time.time()
@@ -12,14 +13,14 @@ start_time = time.time()
 def create_sample_level_dict(title_set):
 
     level_count=int(len(title_set)/10)+1
-    level_dict = {v: "l"+str(int(int(k)%10)+1) for k,v in enumerate(title_set)} 
+    level_dict = {v: "L"+str(int(int(k)%10)+1) for k,v in enumerate(title_set)} 
     return level_dict
 
 # Read Sample Input Json Path
 input_path='sample_input/sample_dataset.json'
 
 # Read Sample Output Json Path
-output_path="sample_output/sample_output.csv"
+output_path="sample_output/sample_output_"+ str(int(start_time)) +"_.csv"
 
 # Read dict data
 try:
@@ -86,5 +87,6 @@ except Exception as ex:
     print("There is something went wrong int the script!", ex)
 
 finally:
-     print("Total execution time: ", time.time()-start_time)
+    print("Start time of script: ", int(start_time))
+    print("Total execution time: ", time.time()-start_time)
 
