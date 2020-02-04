@@ -1,0 +1,71 @@
+{% load get_at_index %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+#sorting {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 50%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: green;
+}
+</style>
+</head>
+<body>
+
+<select name="sorting">
+  {% for col in cols %}
+      {% ifequal col selected_col %}
+          <option value="{{col}}" selected="selected">col </option>
+      {% else %}
+          <option value="{{col}}">{{col}}</option>
+      {% endifequal %}
+  {% endfor %}
+</select>
+
+<table id="customers">
+  {% for row in numbers %}
+
+  <tr>
+    <td>{{ data.users|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers1|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers2|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers3|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers4|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers5|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers6|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers6|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers7|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.managers8|get_at_index:forloop.counter0 }}</td>
+    <td>{{ data.levels|get_at_index:forloop.counter0 }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from managers_hierarchy_api.views import HierarchyController
+from managers_hierarchy_api.views import HierarchyController, index
 
 urlpatterns = [
-  path('', HierarchyController.as_view()),
+  path('', index),
+  path('data', HierarchyController.as_view()),
 ]

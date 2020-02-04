@@ -19,10 +19,10 @@ class GenerateCSVController():
         # Track starting time
         start_time = time.time()
         # Read Sample Input Json Path
-        input_path='/home/swastav/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
+        input_path='hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
 
         # Read Sample Output Json Path
-        output_path="/home/swastav/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv"
+        output_path="hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv"
         
         # Read dict data
         try:
