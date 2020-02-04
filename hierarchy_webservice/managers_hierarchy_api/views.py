@@ -1,9 +1,26 @@
 from django.shortcuts import render
-from serializers import HierarchySerializers
-from django.http import Request
 from rest_framework.views import APIView
-from django import JsonResponse
-from genreate_hierarchy import start_process
+from .generate_hierarchy import GenerateCSVController
+import csv, os
+import traceback
+from django.http import JsonResponse
+
+def index(request, sortby=None):
+    if sortby is not None:
+        data={'users': [], 'levels':[]}
+
+        with open('/home/swastav/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv', 'w+') as csvfile:
+            readCSV=csv.reader(csvfile, delimiter=',')
+            for row in readCSV:
+                data['users'].append(row[0])
+                data['levels'].append(row[-1])
+
+                for i in range(1,9):
+                    data['managers'+str(i).append(row[i])]
+    # else:
+        ## write code to fetch sorted data for html
+
+    return render(request, 'index.html', {'data': data, 'numbers': range(len(data['users']))})
 
 class HierarchyController(APIView):
 
@@ -14,20 +31,18 @@ class HierarchyController(APIView):
             else:
                 sortby=None
             # read file and sort it by given keys
-            inpuy_folder_path = 'managers_hierarchy_api/sample_input/'
+            # input_folder_path = 'managers_hierarchy_api/sample_input/sample_input.json'
+            input_folder_path ='/home/swastav/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
             
             # Run and calculate hierarchy for the input file
             if os.path.exists(input_folder_path):
                 # Call the function which calculates the hierarchy
-                start_process()
+                GenerateCSVController().start_process()
             else:
-                raise Exception("The input file doesn't exists! please provide input file in the sample input folder.')
-
-            if sortby is None:
-                ## r=  write code to sort data in reuested format and return response
-            else:
-                ## read csv and sort data by request field
-                pass
+                raise Exception("The input file doesn't exists! please provide input file in the sample input folder.")
+            ## read csv and sort data by request field
+            index(sortby, input_folder_path)
+            
             return JsonResponse(r)
         except Exception as e:
             traceback.print_exc()

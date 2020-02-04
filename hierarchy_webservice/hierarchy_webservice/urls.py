@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .managers_hierarchy_api.views import HierarchyController
+from managers_hierarchy_api.views import HierarchyController
 
 urlpatterns = [
-  path('/show_data', views.HierarchyController.as_view(), name='csv_home_page'),
+  path('', HierarchyController.as_view()),
 ]

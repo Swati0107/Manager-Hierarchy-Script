@@ -56,7 +56,7 @@ ROOT_URLCONF = 'hierarchy_webservice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,9 +122,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-output_folder_path = 'managers_hierarchy_api/sample_output/sample_output.csv'
+# output_folder_path = 'managers_hierarchy_api/sample_output/sample_output.csv'
 
-if os.path.exists(output_folder_path):
-    os.remove(output_folder_path)
-else:
-    os.mkdir(output_folder_path)
+# if os.path.exists(output_folder_path):
+#     os.remove(output_folder_path)
+# else:
+#     os.mkdir(output_folder_path)
