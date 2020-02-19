@@ -61,20 +61,23 @@ class HierarchyController(APIView):
 
     def get(self, request):
         try:
+            a=None
             if request.GET.get('sortby'):
                 sortby= request.GET['sortby']
             else:
                 sortby=None
             # read file and sort it by given keys
-            input_folder_path ='hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
+            input_folder_path ='/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
             
             # Run and calculate hierarchy for the input file
             if os.path.exists(input_folder_path):
                 # Call the function which calculates the hierarchy
-                GenerateCSVController().start_process()
+                a= GenerateCSVController().start_process()
             else:
                 raise Exception("The input file doesn't exists! please provide input file in the sample input folder.")
             return JsonResponse({})
         except Exception as e:
             traceback.print_exc()
             return JsonResponse({'error': str(e)})
+        finally:
+            return JsonResponse({'result': a})

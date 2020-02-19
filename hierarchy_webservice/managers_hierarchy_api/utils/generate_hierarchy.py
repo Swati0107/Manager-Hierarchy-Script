@@ -19,10 +19,10 @@ class GenerateCSVController():
         # Track starting time
         start_time = time.time()
         # Read Sample Input Json Path
-        input_path='hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
+        input_path='/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
 
         # Read Sample Output Json Path
-        output_path="hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv"
+        output_path="/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv"
         
         # Read dict data
         try:
@@ -87,6 +87,9 @@ class GenerateCSVController():
         
             df['Manager Level']=df['Manager_Role_Position']
             del df['Manager_Role_Position'] 
+            data=df.to_json(orient='index')
+            result=json.loads(data.replace('\\"','"'))
+            return result
             df.to_csv(output_path, index=None)
         
         except JSONDecodeError:
