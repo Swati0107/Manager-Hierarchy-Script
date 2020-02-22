@@ -7,6 +7,7 @@ import time
 import traceback
 
 class GenerateCSVController():
+
     # Creating random roles list to defind levels as it's value
     def create_level_mapping(self, user_level_dict):
         for k,v in user_level_dict.items():
@@ -15,14 +16,15 @@ class GenerateCSVController():
         return user_level_dict
 
 
-    def start_process(self):
+    def start_process(self, input_path, output_path, sort_by):
         # Track starting time
         start_time = time.time()
+        
         # Read Sample Input Json Path
-        input_path='/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
+        # input_path='/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_input/sample_input.json'
 
         # Read Sample Output Json Path
-        output_path="/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv"
+        # output_path="/home/swati/Desktop/Manager-Hierarchy-Script/hierarchy_webservice/managers_hierarchy_api/sample_output/sample_output.csv"
         
         # Read dict data
         try:
@@ -87,10 +89,19 @@ class GenerateCSVController():
         
             df['Manager Level']=df['Manager_Role_Position']
             del df['Manager_Role_Position'] 
-            data=df.to_json(orient='index')
+            data=df.to_json(orient='records')
             result=json.loads(data.replace('\\"','"'))
+            
+            if sort_by is not None:
+                desc='-' in sort_by
+                if not desc:
+
+                    result = sorted(result, key=lambda d: d[str(sort_by)])
+                else:
+                    val=sort_by.split('-')[1]
+                    result = sorted(result, key=lambda d: d[str(val)], reverse=True)
+
             return result
-            df.to_csv(output_path, index=None)
         
         except JSONDecodeError:
             print("Please provide valid json as an input!!!")
